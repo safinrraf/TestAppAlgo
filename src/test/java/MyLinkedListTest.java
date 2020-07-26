@@ -68,7 +68,7 @@ public class MyLinkedListTest {
         linkedList.addAtTail(5); //2
         linkedList.addAtTail(6); //3
 
-        linkedList.deleteAtIndex(2);
+        linkedList.deleteAtIndex(0);
 
         printSinglyListNode(linkedList);
 

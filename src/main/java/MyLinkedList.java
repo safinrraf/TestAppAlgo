@@ -3,17 +3,24 @@ class MyLinkedList {
     class SinglyListNode {
         int val;
         SinglyListNode next;
-        SinglyListNode(int x) { val = x;}
+
+        SinglyListNode(int x) {
+            val = x;
+        }
     }
 
     SinglyListNode head;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public MyLinkedList() {
         head = null;
     }
 
-    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    /**
+     * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+     */
     public int get(int index) {
         if (head == null) {
             return -1;
@@ -31,7 +38,9 @@ class MyLinkedList {
         return -1;
     }
 
-    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    /**
+     * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+     */
     public void addAtHead(int val) {
         if (head == null) {
             head = new SinglyListNode(val);
@@ -42,7 +51,9 @@ class MyLinkedList {
         }
     }
 
-    /** Append a node of value val to the last element of the linked list. */
+    /**
+     * Append a node of value val to the last element of the linked list.
+     */
     public void addAtTail(int val) {
         if (head == null) {
             head = new SinglyListNode(val);
@@ -55,50 +66,56 @@ class MyLinkedList {
         }
     }
 
-    /** Add a node of value val before the index-th node in the linked list.
+    /**
+     * Add a node of value val before the index-th node in the linked list.
      * If index equals to the length of linked list, the node will be appended to the end of linked list.
-     * If index is greater than the length, the node will not be inserted. */
+     * If index is greater than the length, the node will not be inserted.
+     */
     public void addAtIndex(int index, int val) {
         if (head != null) {
-            int i = 0;
-            SinglyListNode tmp = head;
-            SinglyListNode before = null;
-            while (tmp.next != null) {
-                if ((index - 1) == i) {
-                    before = tmp;
+            if (index == 0) {
+                this.addAtHead(val);
+            } else {
+                int i = 0;
+                SinglyListNode tmp = head;
+                SinglyListNode before = null;
+                while (tmp.next != null) {
+                    if ((index - 1) == i) {
+                        before = tmp;
+                    }
+                    if (index == i) {
+                        break;
+                    }
+                    tmp = tmp.next;
+                    i++;
                 }
-                if (index == i) {
-                    break;
+                if (before != null) {
+                    SinglyListNode newNode = new SinglyListNode(val);
+                    newNode.next = tmp;
+                    before.next = newNode;
                 }
-                tmp = tmp.next;
-                i++;
-            }
-            if(before != null) {
-                SinglyListNode newNode = new SinglyListNode(val);
-                newNode.next = tmp;
-                before.next = newNode;
             }
         }
     }
 
-    /** Delete the index-th node in the linked list, if the index is valid. */
+    /**
+     * Delete the index-th node in the linked list, if the index is valid.
+     */
     public void deleteAtIndex(int index) {
         if (head != null) {
-            int i = 0;
-            SinglyListNode tmp = head;
-            SinglyListNode before = null;
-            while (tmp.next != null) {
-                if ((index - 1) == i) {
-                    before = tmp;
+            if (index == 0) {
+                head = head.next;
+            } else {
+                int i = 0;
+                SinglyListNode tmp = head;
+                while (tmp.next != null) {
+                    if ((index-1) == i) {
+                        tmp.next = tmp.next.next;
+                        break;
+                    }
+                    tmp = tmp.next;
+                    i++;
                 }
-                if (index == i) {
-                    break;
-                }
-                tmp = tmp.next;
-                i++;
-            }
-            if(before != null) {
-                before.next = tmp.next.next;
             }
         }
     }
