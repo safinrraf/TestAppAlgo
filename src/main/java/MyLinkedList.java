@@ -45,7 +45,7 @@ class MyLinkedList {
         if (head == null) {
             head = new SinglyListNode(val);
         } else {
-            SinglyListNode cur = new SinglyListNode(val);
+            final SinglyListNode cur = new SinglyListNode(val);
             cur.next = head;
             head = cur;
         }
@@ -72,28 +72,28 @@ class MyLinkedList {
      * If index is greater than the length, the node will not be inserted.
      */
     public void addAtIndex(int index, int val) {
-        if (head != null) {
-            if (index == 0) {
-                this.addAtHead(val);
+        if (index == 0) {
+            this.addAtHead(val);
+        } else {
+            int i = 0;
+            SinglyListNode tmp = head;
+            SinglyListNode before = null;
+            while (tmp.next != null) {
+                if ((index - 1) == i) {
+                    before = tmp;
+                }
+                if (index == i) {
+                    break;
+                }
+                tmp = tmp.next;
+                i++;
+            }
+            if (before != null) {
+                final SinglyListNode newNode = new SinglyListNode(val);
+                newNode.next = tmp;
+                before.next = newNode;
             } else {
-                int i = 0;
-                SinglyListNode tmp = head;
-                SinglyListNode before = null;
-                while (tmp.next != null) {
-                    if ((index - 1) == i) {
-                        before = tmp;
-                    }
-                    if (index == i) {
-                        break;
-                    }
-                    tmp = tmp.next;
-                    i++;
-                }
-                if (before != null) {
-                    SinglyListNode newNode = new SinglyListNode(val);
-                    newNode.next = tmp;
-                    before.next = newNode;
-                }
+                tmp.next = new SinglyListNode(val);
             }
         }
     }
@@ -109,7 +109,7 @@ class MyLinkedList {
                 int i = 0;
                 SinglyListNode tmp = head;
                 while (tmp.next != null) {
-                    if ((index-1) == i) {
+                    if ((index - 1) == i) {
                         tmp.next = tmp.next.next;
                         break;
                     }
